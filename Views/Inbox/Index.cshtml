@@ -1,0 +1,26 @@
+@model IEnumerable<mabuddy.Models.Inbox>
+
+@{
+    ViewData["Title"] = "Inbox";
+}
+
+<html>
+<body class="body">
+
+<div id="MessageStyle" class="container shadow p-3 mb-5 bg-white rounded" style="margin: 0 auto; margin-top: 10px">
+    <h1>Received Messages</h1>
+    <hr/>
+    @foreach (var p in Model)
+    {
+        <partial name="_InboxPartial", model="p"/>
+    }
+
+</div>
+</body>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/formulaeditor-1.1.35b/org/mathdox/formulaeditor/main.js"></script>
+}
+
+</html>

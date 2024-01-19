@@ -1,0 +1,26 @@
+@model IEnumerable<mabuddy.Models.AddLesson>
+
+@{
+    ViewData["Title"] = "Lessons";
+}
+<html>
+<head>
+
+</head>
+
+<body class="body">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div>
+    <h1 class="btn-block" id="HeadText" style="text-align: center">Lessons</h1>
+    <br/>
+    @foreach (var item in Model)
+    {
+        <partial name="_LessonsPartial" model="item"/>
+    }
+
+</div>
+</body>
+</html>

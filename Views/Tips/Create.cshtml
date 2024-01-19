@@ -1,0 +1,71 @@
+@model mabuddy.Models.Tips
+
+@{
+    ViewData["Title"] = "Add Tips";
+}
+
+<body class="body">
+<div id="tip" v-cloak>
+
+
+    <button type="button" id="create" class="btn btn-primary center" data-toggle="collapse" data-target="#faqForm" style="width: 100%">
+        ADD Tips
+    </button>
+
+    <div id="faqForm" class="row center collapse ">
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-top: 10px">
+                <textarea  asp-for="TipTitle" v-model="tip.TipTitle" class="form-control" placeholder="Tips Title"></textarea>
+
+                <span asp-validation-for="TipTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <textarea asp-for="TipText" v-model="tip.TipText" class="form-control" placeholder="Tips Text"></textarea>
+                <span asp-validation-for="TipText" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="addQuestion" v-on:click="addTip" class="btn btn-primary">Save Tip</button>
+            </div>
+        </div>
+    </div>
+
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm shadow p-3 mb-5 bg-white rounded" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+
+            <th class="th-sm bg-warning">Id</th>
+            <th class="th-sm bg-warning">Tip Title</th>
+            <th class="th-sm bg-warning">Tip Text</th>
+            <th class="th-sm bg-warning">Edit</th>
+            <th class="th-sm bg-warning">Remove</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="Tip in Tips">
+            <td style="padding: 14px;">{{Tip.id}}</td>
+            <td>{{Tip.tipTitle}}</td>
+            <td>{{Tip.tipText}}</td>
+
+            <td>
+                <a v-on:click="Edit(Tip.id)" class="Edit   btn text-light btn-warning">Edit</a>
+            </td>
+            <td>
+                <a v-on:click="remove(Tip.id)" class="Remove   btn text-light btn-danger">Remove</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/tips.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}

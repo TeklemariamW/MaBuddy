@@ -1,0 +1,80 @@
+.row{
+    background-color: #ededed;
+}
+#questionForm{
+    width: 100%; 
+    margin: 0 auto;"
+}
+#videoForm{
+    width: 100%;
+    margin: 0 auto;"
+}
+#faqForm{
+    width: 100%;
+    margin: 0 auto;"
+}
+#lessonForm{
+    width: 100%;
+    margin: 0 auto;"
+}
+#addQuestion{
+    background-color: #fbb92b;
+    border: none;
+    color: white;
+    padding: 10px 125px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+#quiz{
+    background-color: #fbb92b;
+    border: none;
+    padding: 10px 125px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+}
+#FaqStyle{
+    background-color: #fbb92b;
+    border: none;
+    color: white;
+    padding: 10px 125px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 32px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 3px;
+}
+#create{
+
+    background-color: #fbb92b;
+    border: none;
+    color: white;
+    padding: 10px 125px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 3px;
+
+}
+.col-md-4{
+    margin: auto;
+}

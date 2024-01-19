@@ -1,0 +1,70 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<body class="body">
+
+<header class="card-header bg-warning">
+    <h4 class="card-title mt-2">Profile</h4>
+</header>
+<div class="container shadow p-3 mb-5 bg-white rounded" style="margin: 0 auto;">
+
+    <form id="profileForm" method="post">
+
+        <div class="row bg-white" style="background: none;">
+
+            <div class="col-4">
+                <div class="form-group">
+                    <span class="input-group-text" id="basic-addon1" style="height: 75%">Nickname</span>
+
+                </div>
+            </div>
+            <div class="col-8">
+                <input type="text" id="nickname" asp-for="Input.Nickname" name="nickname" style="width: 97%; height: 75%">
+            </div>
+            <div class="w-100"></div>
+            <div class="col-4">
+                <div class="form-group">
+                    <span class="input-group-text" id="basic-addon1" style="height: 75%">Email</span>
+
+                </div>
+            </div>
+            <div class="col-8">
+                <input type="text" id="email" asp-for="Input.Email" name="email" style="width: 97%; height: 75%">
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <span class="input-group-text" id="basic-addon1" style="height: 75%">Level</span>
+
+                </div>
+            </div>
+            <div class="col-8">
+                <input type="number" id="number" max="3" min="1" asp-for="Input.Level" name="Level" style="width: 97%; height: 75%">
+
+            </div>
+            <div class="w-100"></div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-8">
+                <button class=" btn-warning" type="submit" id="addQuestion" value="Submit" style="width: 100%"> Save </button>
+
+            </div>
+        </div>
+
+
+        <hr width="780" align="center">
+
+
+    </form>
+    <header class="card-header bg-warning" style="height: 100px;">
+
+    </header>
+</div>
+
+<div style="height: 50px;"></div>
+
+</body>

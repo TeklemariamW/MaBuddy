@@ -1,0 +1,195 @@
+@using Microsoft.Extensions.Options
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - MathBuddy</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+              integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin='anonymous'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/custom.css"/>
+    <link rel="stylesheet" href="~/css/questionForm.css"/>
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MathBuddy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial"/>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-action="Index">Tips</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Subjects">Math 1</a>
+                                </li>
+                                <hr/>
+                                <text class="nav-link text-danger">Not Implemented!</text>
+                                <li>
+                                    <a class="nav-link text-dark">Math 2</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark">Math 3</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <a class="nav-link text-dark">Extra math</a>
+                            </ul>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Faq">FAQ</a>
+                    </li>
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Panel<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="Index">Add Questions</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Video" asp-action="Index">Add Videos</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="AddLesson" asp-action="Create">Add Lessons</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-action="Create">Add Tips</a>
+                                </li>
+                                <hr/>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Index">Members</a>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="mheader" style="height: 25px">
+</div>
+<div class="container" style="min-height: 100%">
+    <partial name="_CookieConsentPartial"/>
+    <main role="main" class="pb-3" style="min-height: 100%">
+        @RenderBody()
+    </main>
+</div>
+
+
+<footer class="fixed-bottom mfooter py-10" style="height: 70px; background-color: lightgrey;">
+
+    <div class="row" style="background-color: lightgrey">
+        <div class="col">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick"/>
+                <input type="hidden" name="hosted_button_id" value="RDRF7LB8ZJSNG"/>
+                <input type="image" src="https://www.paypalobjects.com/en_US/NO/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button"/>
+                <img alt="" border="0" src="https://www.paypal.com/en_NO/i/scr/pixel.gif" width="1" height="1"/>
+            </form>
+
+        </div>
+        <div class="col">
+
+            <form action="/Home" method="POST">
+                <script src="//checkout.stripe.com/v2/checkout.js"
+                        class="stripe-button"
+                        data-key="@Stripe.Value.PublishableKey"
+                        data-description="Donate"
+                        data-amount=5000>
+                </script>
+            </form>
+        </div>
+
+        <div class="col">
+            <h6>
+                Follow Us On
+                <a href="https://www.youtube.com/channel/UCGVWGphVl9xha9sHePSJ5qw?disable_polymer=true">
+                    <i class="fa" aria-hidden="true">Youtube</i>
+                </a>
+            </h6>
+
+        </div>
+
+
+        <div class="col">
+            <address>
+                <h6> Contact us: <a href="mailto:mathbuddy2019@gmail.com">mathbuddy2019@gmail.com</a></h6>
+            </address>
+        </div>
+      
+        <div class="col">
+            <h6>&copy; 2019 - All Rights Reserved MathBuddy.no</h6>
+        </div>
+    </div>
+    <br/>
+</footer>
+
+
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+    </script>
+</environment>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

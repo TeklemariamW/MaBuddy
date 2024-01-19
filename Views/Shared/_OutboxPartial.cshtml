@@ -1,0 +1,44 @@
+@using Microsoft.AspNetCore.Identity
+@model mabuddy.Models.Inbox
+@using Microsoft.EntityFrameworkCore;
+
+<!DOCTYPE html>
+@if (User.Identity.Name == Model.ApplicationUser.UserName)
+{
+    <body class="body">
+    <div class="container shadow p-3 mb-4 bg-white rounded">
+        <div class="well">
+            <div class="media">
+                <div class="media-body">
+                    <h4 id="HeadText" class="media-heading d-lg-block">@Model.Title</h4>
+                    <br/>
+                    <h6 class="Nickname">To: @Model.To</h6>
+                    <hr/>
+                    <h6>
+                        <p class="Content">@Model.Content</p>
+                    </h6>
+                    <hr/>
+                    <h6>External Link: <a href="@Model.Link">@Model.Link</a></h6>
+                    <hr/>
+                    Mathmatical Formula:
+                    <textarea class="mathdoxformula">@Model.Math</textarea>
+                    <hr/>
+                    <ul class="list-inline list-unstyled">
+                        <li class="Time">
+                            <span>
+                                <i class="glyphicon glyphicon-calendar"></i>@Model.Time</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    </body>
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="formulaeditor-1.1.35b/org/mathdox/formulaeditor/main.js"></script>
+
+}

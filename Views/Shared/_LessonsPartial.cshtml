@@ -1,0 +1,20 @@
+@model mabuddy.Models.AddLesson
+@using mabuddy.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+@{
+    ApplicationUser currentUser = null;
+    currentUser = await UserManager.GetUserAsync(User);
+
+}
+
+@if (Model.Level == currentUser.Level)
+{
+    <div class="container shadow p-3 mb-2 bg-white rounded bg-white" style="height: auto;">
+        <h1 style="text-align: center">@Model.LessonTitle</h1>
+        <h5 style="text-align: center">Level: @Model.Level, Subject: @Model.Subject</h5>
+        <iframe src="@Model.LessonUrl" id="file_content" title="HTML" style="width: 100%; height: 1000px;"></iframe>
+    </div> 
+}

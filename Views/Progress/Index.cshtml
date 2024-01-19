@@ -1,0 +1,116 @@
+@using mabuddy.Data
+@using Microsoft.AspNetCore.Identity
+@model List<Progress>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+
+@{
+    ViewData["Title"] = "Quiz";
+}
+@{
+    ApplicationUser currentUser = null;
+    currentUser = await UserManager.GetUserAsync(User);
+}
+
+<body class="body" style="height: 500px">
+<div id="progress" v-cloak>
+
+    <div>
+        <div class="container shadow p-3 mb-3 bg-white rounded" v-if="introStage">
+            <h3 style="text-align: center">Welcome to the Quiz which is relevant to level @currentUser.Level. </h3>
+
+            <h3 style="text-align: center">Remember to submit your answer to go to the next question. </h3>
+            <h4 style="text-align: center">Start the quiz by clicking one of the buttons below</h4>
+
+
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3" style="background: none;">
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="background: none;">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark btn btn-warning" id="DerivationQuiz" v-on:click="DerivationQuiz">Derivation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark btn btn-warning" id="IntegralQuiz" v-on:click="IntegralQuiz">Integration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark btn btn-warning" id="LimitQuiz" v-on:click="LimitQuiz">Limits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark btn btn-warning" id="ComplexNumberQuiz" v-on:click="ComplexNumberQuiz">Complex Numbers</a>
+                </li>
+
+                @if (currentUser.Level == 2 || currentUser.Level == 3)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark btn btn-warning" id="SeriesQuiz" v-on:click="SeriesQuiz">Sequence & Series</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark btn btn-warning" id="partialDerivationQuiz" v-on:click="partialDerivationQuiz">Partial Derivation</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+    @if (currentUser.Level == 3)
+    {
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3" style="background: none;">
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="background: none;">
+                <ul class="navbar-nav flex-grow-1">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark btn btn-warning" id="applicationOfDerivationQuiz" v-on:click="applicationOfDerivationQuiz">Application Of Derivation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark btn btn-warning" id="applicationOfIntegrationQuiz" v-on:click="applicationOfIntegrationQuiz">Application Of Integration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark btn btn-warning" id="inverseFunctionQuiz" v-on:click="inverseFunctionQuiz">Inverse Function</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    }
+
+
+    <div v-if="questionStage">
+        <question
+            :question="questions[currentQuestion]"
+            v-on:answer="handleAnswer"
+            :question-number="currentQuestion+1">
+        </question>
+
+        <div class="row" style="background: none">
+            <div class="col">
+                <button class="btn btn-block btn-secondary" v-if="currentQuestion > 0" v-on:click="prev"> prev </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-block btn-dark" v-if="questions.length > 0" v-on:click="next">next</button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <br></br>
+    <div class="container shadow p-3 mb-3 bg-white rounded" v-if="resultsStage">
+        <h3 style="text-align: center"> You Got {{correct}} right out of {{questions.length}} questions. Your percentage is {{percent}} %.</h3>
+        <br/>
+        <div>
+            <button class="btn btn-block btn-success" v-on:click="SubmitResult">Submit Result! </button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+@section Scripts
+{
+    <script src="~/js/progress.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}

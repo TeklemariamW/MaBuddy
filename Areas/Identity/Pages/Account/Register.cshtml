@@ -1,0 +1,62 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<body class="bodyLogin">
+
+<div class="container">
+    <div class="row justify-content-center" style="background: none;">
+        <div class="col-md-6">
+            <div class="card">
+                <header class="card-header bg-warning">
+                    <a class="float-right btn btn-outline-dark mt-1" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+                    <h4 class="card-title mt-2">Sign up</h4>
+                </header>
+                <article class="card-body">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label asp-validation-for="Input.Nickname">Nickname </label>
+                                <input type="text" required asp-for="Input.Nickname" class="form-control" placeholder="">
+                                <span asp-validation-for="Input.Nickname" class="text-danger"></span>
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label asp-validation-for="Input.Age">Age</label>
+                                <input required type="number" min="10" asp-for="Input.Age" class="form-control" placeholder=" ">
+                                <span asp-validation-for="Input.Age" class="text-danger"></span>
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+                        <div class="form-group">
+                            <label asp-validation-for="Input.Email">Email address</label>
+                            <input type="email" required asp-for="Input.Email" class="form-control" placeholder="">
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div> <!-- form-group end.// -->                    
+
+                        <div class="form-group">
+                            <label asp-validation-for="Input.Password">Create password</label>
+                            <input class="form-control" type="password" required asp-for="Input.Password">
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <br/>
+                            <label asp-validation-for="Input.ConfirmPassword">Confirm password</label>
+                            <input class="form-control" type="password" required asp-for="Input.ConfirmPassword">
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div> <!-- form-group end.// -->
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-warning btn-block"> Register </button>
+                        </div> <!-- form-group// -->
+                    </form>
+                </article> <!-- card-body end .// -->
+            </div> <!-- card.// -->
+        </div> <!-- col.//-->
+    </div> <!-- row.//-->
+</div>
+<div style="height: 30px;"></div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

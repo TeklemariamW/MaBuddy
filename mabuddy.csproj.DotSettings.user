@@ -1,0 +1,3 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/MappedPaths/=WWWROOT_005CFORMULAEDITOR_002D1_002E1_002E35B_005CORG_005CMATHDOX_005CFORMULAEDITOR_005CMAIN_002EJ/@EntryIndexedValue"></s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=WWWROOT_005CFORMULAEDITOR_002D1_002E1_002E35B_005CORG_005CMATHDOX_005CFORMULAEDITOR_005CMAIN_002EJ/@EntryIndexedValue">wwwroot\formulaeditor-1.1.35b\org\mathdox\formulaeditor\main.j</s:String></wpf:ResourceDictionary>

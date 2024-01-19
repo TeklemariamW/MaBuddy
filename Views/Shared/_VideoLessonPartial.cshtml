@@ -1,0 +1,15 @@
+@model mabuddy.Models.Video
+
+<div class="col-xl-4 col-lg-8 col-md-6 col-sm-12 col-12">
+    <div class="video-testimonial-block">
+        <div class="video">
+            <iframe width="360px" height="200px" src="@Model.videoUrl" allowfullscreen>
+            </iframe>
+        </div>
+        <a href="#" class="video-play"></a>
+    </div>
+    <div class="video-testimonial-content">
+        <h4 class="mb10">@Model.VideoTitle</h4>
+        <h6 class="mb10">Level: @Model.Level</h6>
+    </div>
+</div>

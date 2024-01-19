@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Members";
+}
+
+<body class="body">
+<h3 class="align-middle">List of registered users</h3>
+<div id="member" v-cloak>
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm shadow p-3 mb-5 bg-white rounded" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th class="th-sm bg-warning">Id</th>
+            <th class="th-sm bg-warning">Nickname</th>
+            <th class="th-sm bg-warning">Email</th>
+            <th class="th-sm bg-warning">Age</th>
+            <th class="th-sm bg-warning">Level</th>
+            <th class="th-sm bg-warning">Role</th>
+            <th class="th-sm bg-warning">Change Role To</th>
+            <th class="th-sm bg-warning">Change</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(member,index) in memberAndRole.members">
+            <td style="padding: 14px;">{{index + 1}}</td>
+            <td>{{member.user.nickname}}</td>
+            <td>{{member.user.email}}</td>
+            <td>{{member.user.age}}</td>
+            <td>{{member.user.level}}</td>
+            <td>{{member.role}}</td>
+            <td>
+            <select v-model="member.selectedRole">
+                <option v-for="option in options" v-bind:value="option.value">
+                    {{ option.text }}
+                </option>
+            </select>
+            <td>
+                <a v-on:click="Edit(member.user.id)" class="Edit   btn text-light btn-warning">Change</a>
+            </td>
+
+        </tr>
+    </table>
+
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/members.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}

@@ -1,0 +1,20 @@
+@model object
+@{
+    ViewData["Title"] = "Lessons";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Lessons</title>
+</head>
+<body class="body">
+
+<button class="btn-block btn-dark">Tips</button>
+<button class="btn-block btn-dark">Learn</button>
+<button class="btn-block btn-dark" value="derivation" onclick="event.preventDefault();location.href = '@Url.Action("Index", "Progress")'">
+    Test
+</button>
+
+</body>
+</html>

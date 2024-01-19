@@ -1,0 +1,85 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item dropdown">
+            <a href="#" style='font-size: 20px' class="fas fa-envelope nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Messages<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Inbox" asp-action="Index">Inbox</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Inbox" asp-action="Outbox">Outbox</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Inbox" asp-action="Create">Send A Message</a>
+                </li>
+
+            </ul>
+        </li>
+    }
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+
+        if (user.Nickname == null)
+        {
+            <li class="nav-item dropdown">
+                <a href="#" class=" fas fa-user-alt nav-link text-dark dropdown-toggle" style='font-size: 20px'
+
+                   data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Hi @user.UserName<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-dark">Setting</a>
+                    </li>
+                    <hr/>
+                    <li>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
+                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item dropdown">
+                <a href="#" class=" fas fa-user-alt nav-link text-dark dropdown-toggle" style='font-size: 20px'
+
+                   data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Hi @user.Nickname<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
+                    </li>
+
+                    <hr/>
+                    <li>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
+                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

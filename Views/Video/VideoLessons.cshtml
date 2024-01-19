@@ -1,0 +1,68 @@
+@using mabuddy.Data
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<mabuddy.Models.Video>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+
+@{
+    ViewData["Title"] = "Video Lessons";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body class="body">
+<div class="space-medium">
+    <div class="container">
+
+        <div class="row" style="background: none;">
+            <!-- video-testimonail -->
+            @{
+                ApplicationUser currentUser = null;
+                currentUser = await UserManager.GetUserAsync(User);
+                if (currentUser.Level == 1 || currentUser.Level == 2 || currentUser.Level == 3)
+                {
+                    <h1 class="btn-block" id="HeadText" style="text-align: center">LEVEL 1</h1>
+                    foreach (var p in Model)
+                    {
+                        if (p.Level == 1)
+                        {
+                            <partial name="_VideoLessonPartial", model="p"/>
+                        }
+                    }
+                }
+                <br/>
+                if (currentUser.Level == 2 || currentUser.Level == 3)
+                {
+                    <h1 class="btn-block" id="HeadText" style="text-align: center">LEVEL 2</h1>
+                    foreach (var p in Model)
+                    {
+                        if (p.Level == 2)
+                        {
+                            <partial name="_VideoLessonPartial", model="p"/>
+                        }
+                    }
+                }
+                <br/>
+                if (currentUser.Level == 3)
+                {
+                    <h1 class="btn-block" id="HeadText" style="text-align: center">LEVEL 3</h1>
+                    foreach (var p in Model)
+                    {
+                        if (p.Level == 3)
+                        {
+                            <partial name="_VideoLessonPartial", model="p"/>
+                        }
+                    }
+                }
+            }
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

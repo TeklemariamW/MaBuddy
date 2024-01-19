@@ -1,0 +1,104 @@
+@model mabuddy.Models.AddLesson
+
+@{
+    ViewData["Title"] = "Add Lesson";
+}
+
+<html>
+<head>
+
+</head>
+<body class="body">
+<div id="lesson" v-cloak>
+
+    <button type="button" id="create" class="btn btn-primary center" data-toggle="collapse" data-target="#lessonForm" style="width: 100%">
+        ADD Lesson
+    </button>
+
+    <div id="lessonForm" class="row center collapse ">
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-top: 10px">
+                <input asp-for="LessonTitle" v-model="lesson.LessonTitle" class="form-control" placeholder="Lesson Title"></input>
+
+                <span asp-validation-for="LessonTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <select id="Level" v-model="lesson.Level">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-control">
+                <label asp-for="Subject" class="control-label"></label>
+                <select id="Subject" v-model="lesson.Subject">
+                    <option>Integration</option>
+                    <option>Derivation</option>
+                    <option>Limits</option>
+                    <option>Complex Numbers</option>
+                    <hr/>
+                    <option>Partial Derivation</option>
+                    <option>Sequence And Series</option>
+                    <hr/>
+                    <option>Application Of Derivation</option>
+                    <option>Application Of Integration</option>
+                    <option>Inverse Functions</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input asp-for="LessonUrl" v-model="lesson.LessonUrl" class="form-control" placeholder="Lesson Url"/>
+                <span asp-validation-for="LessonUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="addQuestion" v-on:click="addLesson" class="btn btn-primary">Save Lesson</button>
+            </div>
+        </div>
+    </div>
+
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm shadow p-3 mb-5 bg-white rounded" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+
+            <th class="th-sm bg-warning">Id</th>
+            <th class="th-sm bg-warning">Lesson Title</th>
+            <th class="th-sm bg-warning">Level</th>
+            <th class="th-sm bg-warning">Subject</th>
+            <th class="th-sm bg-warning">Lesson URL</th>
+            <th class="th-sm bg-warning">Edit</th>
+            <th class="th-sm bg-warning">Remove</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="Lesson in Lessons">
+            <td style="padding: 14px;">{{Lesson.id}}</td>
+            <td>{{Lesson.lessonTitle}}</td>
+            <td>{{Lesson.level}}</td>
+            <td>{{Lesson.subject}}</td>
+            <td>{{Lesson.lessonUrl}}</td>
+            <td>
+                <a v-on:click="Edit(Lesson.id)" class="Edit   btn text-light btn-warning">Edit</a>
+            </td>
+            <td>
+                <a v-on:click="remove(Lesson.id)" class="Remove   btn text-light btn-danger">Remove</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/addlesson.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}
+
+</html>

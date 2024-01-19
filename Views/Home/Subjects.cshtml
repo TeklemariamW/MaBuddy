@@ -1,0 +1,125 @@
+@using mabuddy.Data
+@using Microsoft.AspNetCore.Identity
+@model object
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+@{
+    ViewData["Title"] = "Math 1 Subjects";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Subjects</title>
+</head>
+<body class="body" style="height: 1000px;">
+
+
+<h1 style="text-align: center; margin-top: 20px;">SUBJECTS</h1>
+
+<div class="container-fluid" style="margin-top: 40px;">
+
+    <div class="row" style="background: none;">
+        <div class="col-sm-6">
+            <a id="addQuestion" type="submit" class="btn btn-primary" asp-controller="AddLesson" asp-action="Derivation" style="width: 100%">Derivation</a>
+            <p style="text-align: center;"> <b>The problem of slopes</b> is the concerned with finding the slope of a given curve at a given point on the curve. 
+            <b>The problem of areas</b> is concerned with finding the area of a plane region bounded by curves and straight lines. 
+            The <b>solution</b> of the problem of slopes is the subject of <b>differential calculus</b>
+            <p/>
+        </div>
+
+
+        <div class="col-sm-6">
+            <a id="addQuestion" type="submit" class="btn btn-primary" asp-controller="AddLesson" asp-action="Integration" style="width: 100%">Integration</a>
+            <p style="text-align: center;">We would like to have at our disposal a set of integration rules similar to the differentiation rules.  We can find the derivative of any differentiable function using those differentiation rules.          
+            <p/>
+        </div>
+    </div>
+
+
+    <div class="row" style="background: none;">
+        <div class="col-sm-6">
+            <a id="addQuestion" type="submit" class="btn btn-primary" asp-controller="AddLesson" asp-action="Limits" style="width: 100%">Limits</a>
+            <ol type="a">
+                <li>differentiation, for finding  the rate of change of a given function, and </li>
+                <li>integration, for finding a function having a given rate of change</li>
+            </ol>
+            Both of these procedures are based on the fundamental concept of the <b>limit</b> of a function.
+            It is this area of idea that distinguishes calculus from algebra, geometry, and trigonometry, which are useful for describing static situations.
+           
+        </div>
+
+
+        <div class="col-sm-6">
+            <a id="addQuestion" type="submit"class="btn btn-primary" asp-controller="AddLesson" asp-action="ComplexNumbers" style="width: 100%">Complex Numbers</a>
+            <ul>
+                <li>Graphical representation of complex Number</li>
+                <li>Complex Arithmetic</li>
+                <li>Roots of Complex Number</li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+
+
+@{
+    ApplicationUser currentUser = null;
+    currentUser = await UserManager.GetUserAsync(User);
+    if (currentUser.Level == 2 || currentUser.Level == 3)
+    {
+        <div class="container-fluid">
+
+            <div class="row" style="background: none;">
+                <div class="col-sm-6">
+                    <a id="addQuestion" type="submit" class="btn btn-primary" asp-controller="AddLesson" asp-action="PartialDerivation" style="width: 100%">Partial Derivation</a>
+                    <ul>
+                        <li>Tangent planes and Normal lines</li>
+                        <li>Distance from a point to a surface</li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <a id="addQuestion" type="submit"class="btn btn-primary" asp-controller="AddLesson" asp-action="SequenceAndSeries" style="width: 100%">Sequence And Series</a>
+                    <p style="text-align: center;"> sequence is a list of objects which have been ordered in a sequential fashion; such that each member either comes before, or after, every other member.
+                    <p/>
+                </div>
+            </div>
+        </div>
+    }
+    if (currentUser.Level == 3)
+    {
+        <div class="container-fluid">
+
+            <div class="row" style="background: none;">
+                <div class="col-sm-6">
+                    <a id="addQuestion" type="submit" class="btn btn-primary" asp-controller="AddLesson" asp-action="ApplicationOfDerivation" style="width: 100%">Application Of Derivation</a>
+                    <p style="text-align: center;">Derivative is an expression that gives the rate of change of a function with respect to an independent variable.
+                    <p/>
+                </div>
+                <div class="col-sm-6">
+                    <a id="addQuestion" type="submit"class="btn btn-primary" asp-controller="AddLesson" asp-action="ApplicationOfIntegration" style="width: 100%">Application Of Integration</a>
+                    <p style="text-align: center;">Applications of the Indefinite Integral shows how to find displacement (from velocity) and velocity (from acceleration) using the indefinite integral.
+                    <p/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+
+            <div class="row" style="background: none;">
+                <div class="col text-center">
+                    <a id="addQuestion" type="submit"class="btn btn-primary" asp-controller="AddLesson" asp-action="InverseFunctions" style="width: 50%">Inverse Functions</a>
+                    <p style="text-align: center;">inverse function is a function that "reverses" another function.</p>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+<div class="container" style="height: 200px;"></div>
+
+</body>
+</html>

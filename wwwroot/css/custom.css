@@ -1,0 +1,183 @@
+/* Meny */
+div.navbar {background-color: #FFFFFF;
+}
+
+/*Mattebilde-TYNT*/
+div.matte_tynt_bilde {
+    background-image: url("../images/Ihatemath_line.png");
+    height: 65px;
+}
+
+
+/*MATTEBILDE-STORT*/
+div.matte_stort_bilde {
+    background-image: url("../images/Ihatemath_bg.png");
+    height: 500px;
+}
+
+/*LITE VIDEOKLIPP BILDE*/
+div.video_liten {
+    background-image: url("../images/Screenshot1.png");
+    height: 80%;
+}
+
+/*DIV-BG-ORANGE*/
+div.bg_orange {
+    background-color: #FBB92E;
+    height: 500px;
+}
+
+/*DIV-BG-ORANGE*/
+div.bg_grey {
+    background-color: #EDEDED;
+    height: 500px;
+}
+
+div {
+    padding: 0px;
+}
+
+div.row {
+    width: auto;
+    padding: 0px;
+;
+}
+
+div.top {
+    background-color: #0d5aa7;
+    margin: 0%;
+    padding: 0%;
+}
+
+
+/*GUL FIN OVERSKRIFT feks: "To pass or not to pass"..*/
+div.gulfinoverskrift {
+    align-content: center;
+    color: #FBB92E;
+    font-size: 300%;
+    text-align: center;
+    font-family: SignPainter;
+}
+
+/*GUL FIN OVERSKRIFT feks: "To pass or not to pass"..*/
+div.overskrift_grey {
+    align-content: center;
+    color: #EDEDED;
+    font-size: 300%;
+    text-align: center;
+    font-family: SignPainter;
+}
+
+/*INDEX STUDENT - STYLE FORM*/
+div.index_student {
+    text-align: center;
+
+}
+
+
+/*GRAA LINJE*/
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Logo - MABUDDY */
+div#logo {color: black;
+    font-size: larger}
+
+div.table {color: white; font-size: x-large}
+
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+    margin-bottom: 0 !important;
+    border-radius: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+footer {
+    background-color: white;
+    padding: 25px;
+}
+
+
+nav.navbar.navbar-expand-md {
+    background-color: white;
+}
+
+button.button.navbar {
+    color: black;
+}
+
+
+/*ALT SOM SKJER PÃ… ELLER VED DET STORE BILDET*/
+
+/*Selve bildet*/
+div.table {
+    background-image: url("../images/C_level.png");
+    background-position: center;
+    height: 25px;
+}
+div.mheader {
+    background-image: url("../images/math-problem-760x506.jpg");
+    background-position: center;
+    height: 25px;
+}
+
+div.mfooter {
+    height: 10rem;
+    bottom: 0px !important;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    
+}
+/*Informasjon forran mattebildet*/
+div.col-md-6{
+    padding: 5%;
+}
+
+/*Quote "To pass or not to pass*/
+.content-quote {
+    color: orange;
+    font-size: x-large;
+    padding: 10%;
+}
+
+
+/*Quote "To pass or not to pass*/
+.content-form {
+    background-color: white;
+
+    font-size: x-large;
+}
+#HeadText{
+    background-color: rgba(251, 185, 43, 0.74);
+    border: none;
+    color: white;
+    padding: 10px 125px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 32px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 3px;
+}
+#MessageStyle{
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 125px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+}

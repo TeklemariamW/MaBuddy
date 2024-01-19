@@ -1,0 +1,85 @@
+@model HomeModel
+
+@{
+    ViewData["Title"] = "FAQ";
+}
+<!DOCTYPE html>
+
+<html>
+
+
+<body class="body" style="height: 1000px">
+<div id="faq" v-cloak>
+    @if (User.IsInRole("Admin"))
+    {
+        <button type="button" id="create" class="btn btn-primary center" data-toggle="collapse" data-target="#faqForm" style="width: 100%">
+            ADD FAQ
+        </button>
+
+        <div id="faqForm" class="row center collapse ">
+
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="margin-top: 10px">
+                    <textarea  asp-for="FaqQuestion" v-model="faq.FaqQuestion" class="form-control" placeholder="Question"></textarea>
+                    <span asp-validation-for="FaqQuestion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <textarea asp-for="FaqAnswer" v-model="faq.FaqAnswer" class="form-control" placeholder="Answer"></textarea>
+                    <span asp-validation-for="FaqAnswer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="addQuestion" v-on:click="addQuestion" class="btn btn-primary">Save Question</button>
+                </div>
+            </div>
+        </div>
+
+        <table id="dtBasicExample" class="table table-striped table-bordered table-sm shadow p-3 mb-5 bg-white rounded" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+
+                <th class="th-sm bg-warning">Id</th>
+                <th class="th-sm bg-warning">Question</th>
+                <th class="th-sm bg-warning">Answer</th>
+
+                <th class="th-sm bg-warning">Edit</th>
+                <th class="th-sm bg-warning">Remove</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="Faq in Faqs">
+                <td style="padding: 14px;">{{Faq.id}}</td>
+                <td>{{Faq.faqQuestion}}</td>
+                <td>{{Faq.faqAnswer}}</td>
+
+                <td>
+                    <a v-on:click="Edit(Faq.id)" class="Edit   btn text-light btn-warning">Edit</a>
+                </td>
+                <td>
+                    <a v-on:click="remove(Faq.id)" class="Remove   btn text-light btn-danger">Remove</a>
+                </td>
+
+            </tr>
+
+        </table>
+    }
+    <div class="container shadow p-3 mb-5 rounded">
+        <h1 class="btn-block" id="HeadText" style="text-align: center">Frequently Asked Questions</h1>
+        <div class="container shadow p-3 mb-2 bg-white rounded bg-white" v-for="Faq in Faqs">
+            <h1>{{Faq.faqQuestion}}</h1>
+            <p>{{Faq.faqAnswer}}</p>
+        </div>
+    </div>
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/faq.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}
+
+</html>

@@ -1,0 +1,33 @@
+@model IEnumerable<mabuddy.Models.AddLesson>
+
+@{
+    ViewData["Title"] = "Complex Numbers";
+}
+<html style="height: 100%;">
+<head>
+
+</head>
+
+<body class="body" style="min-height: 100%;">
+<div>
+    <h1 class="btn-block" id="HeadText" style="text-align: center">Complex Numbers</h1>
+    <br/>
+    @foreach (var item in Model)
+    {
+        if (item.Subject == "Complex Number")
+        {
+            <partial name="_LessonsPartial" model="item"/>
+        }
+    }
+
+    <div class="row" style="background: none">
+        <div class="col-12">
+            <a class=" btn-warning" type="submit" id="addQuestion" asp-controller="Home" asp-action="Subjects" value="Subjects"style="width: 33%">Subjects</a>
+            <a class=" btn-warning" type="submit" id="addQuestion" asp-controller="Video" asp-action="VideoLessons" value="Videos" style="width: 33%">Videos</a>
+            <a class=" btn-warning" type="submit" id="addQuestion" onclick="event.preventDefault();location.href = '@Url.Action("Index", "Progress")'" value="Quiz" style="width: 33%"> Test </a>
+        </div>
+    </div>
+    <div class="container" style="height: 200px;"></div>
+</div>
+</body>
+</html>

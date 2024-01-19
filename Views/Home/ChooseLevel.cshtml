@@ -1,0 +1,84 @@
+@model object
+@{
+    ViewData["Title"] = "Choose Level";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Choose Level</title>
+</head>
+<body class="body">
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <h2 style="text-align: center; color: #404040; margin-bottom: 100px;">SELECT THE DESIRED GRADE</h2>
+
+    <div class="row" style="background: none;">
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <img class="mx-auto d-block" src="../images/E_level.png" alt="Level A Image" width="50%" height="20%">
+            </div>
+
+            <div>
+                <h3 style="text-align: center; color: #404040;">E</h3>
+            </div>
+            <div>
+                <p style="text-align: center">You are going to learn: Deriviation, Integration, Limits, Complex numbers</p>
+            </div>
+            <br/><br/>
+            <div class="btn-group ">
+                <a id="addQuestion" class=" btn-primary" asp-controller="Home" asp-action="GradeE">HELP ME TO PASS!</a>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <img class="mx-auto d-block" src="../images/figure_C.png" alt="Level A Image" width="50%" height="20%">
+            </div>
+
+            <div>
+                <h3 style="text-align: center; color: #404040;">C</h3>
+            </div>
+            <div>
+                <p style="text-align: center">You are going to learn: Deriviation, Integration, Limits, Complex numbers, Partal derivation, Sequence and series</p>
+            </div>
+            <br/>
+            <div class="btn-group ">
+                <a id="addQuestion" class=" btn-primary" asp-controller="Home" asp-action="GradeC">C IS A GOOD GRADE!</a>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <img class="mx-auto d-block" src="../images/figure_a.png" alt="Level A Image" width="50%" height="20%">
+
+            </div>
+
+            <div>
+                <h3 style="text-align: center; color: #404040;">A</h3>
+            </div>
+
+            <div>
+                <p style="text-align: center">You are going to learn: Deriviation, Integration, Limits, Complex numbers, Partal derivation, Sequence and series, Application of deriviation, Application of integration, Inverse functions</p>
+            </div>
+
+            <div class="btn-group ">
+                <a id="addQuestion" class=" btn-primary" asp-controller="Home" asp-action="GradeA">NECK OR NOTHING!</a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

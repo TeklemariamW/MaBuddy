@@ -1,0 +1,380 @@
+﻿@using mabuddy.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+@{
+    ViewData["Title"] = "Home";
+}
+
+<html>
+@{
+    ApplicationUser currentUser = null;
+    currentUser = await UserManager.GetUserAsync(User);
+}
+@if (User.Identity.IsAuthenticated)
+{
+    var percent = 0;
+
+    <body class="body">
+    <h1 style="text-align: center; padding-top: 70px;">Mathematics 1: Calculus</h1>
+    <br/>
+
+
+    @{
+        var totalCorrect = 0;
+        foreach (var correct in DbContext.Progresses)
+        {
+            if (correct.userEmail == currentUser.Email && correct.level == currentUser.Level)
+            {
+                totalCorrect = totalCorrect + correct.CountCorrect;
+
+            }
+            if (currentUser.Level == 1)
+            {
+                percent = totalCorrect * 100 / 20;
+
+            }
+            if (currentUser.Level == 2)
+            {
+                percent = totalCorrect * 100 / 30;
+
+            }
+            if (currentUser.Level == 3)
+            {
+                percent = totalCorrect * 100 / 45;
+
+            }
+        }
+
+        <div class="progress" style="width: 100%; height: 40px">
+            <div id="dynamic" class="progress-bar progress-bar-warning bg-warning progress-bar-striped active" role="progressbar"
+                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                <span id="current-progress"></span>
+            </div>
+
+        </div>
+        <script type="type/javascript">
+             name(percent)
+          </script>
+        <script>
+
+            var currentPercent = 0.0;
+            var interval = setInterval(function() {
+                    if (@percent != 0) {
+                        currentPercent += 1.0;
+                    }
+                    $("#dynamic")
+                        .css("width", currentPercent + "%")
+                        .attr("aria-valuenow", currentPercent)
+                        .text(currentPercent + "% Compete");
+                    if (currentPercent >= @percent)
+                        clearInterval(interval);
+                },
+                10);
+
+        </script>
+    }
+
+
+    <hr/>
+    <div class="container shadow p-3 mb-5 bg-white rounded" style="margin: 0 auto; text-align: center;">
+        <h5>To achieve the result you wish for, then you need to go through all the lesson</h5>
+        <h5>and all the videos for your current level. After that you can go through the tests</h5>
+        <h5>and after completing them, you should be ready to take the real exam.</h5>
+        <h3>GOOD LUCK</h3>
+    </div>
+    <hr/>
+    <div class="row" style="background: none;">
+        <div class="col" style="width: 50%">
+            <iframe class="container shadow p-3 mb-5 bg-white rounded" width="100%" height="400px"
+                    src="https://www.youtube.com/embed/FHwegxx3r-A" frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+
+
+        <div class="col shadow p-3 mb-5 bg-white rounded" style="width: 50%">
+            <h3 style="text-align: center;">QUIZ</h3>
+            <h3 style="text-align: center;">Results of Level @currentUser.Level</h3>
+
+            @* If the current user is any level *@
+            @if (currentUser.Level == 1 || currentUser.Level == 2 || currentUser.Level == 3)
+
+
+            {
+                <div style="background: none;">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>
+                                <h5>Derivation =></h5>
+                            </td>
+                            @foreach (var deriv in DbContext.Progresses)
+                            {
+
+                                if (deriv.subject.Equals("derivation") && deriv.level.Equals(currentUser.Level)
+                                    && deriv.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @deriv.CountCorrect/@deriv.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Integration => </h5>
+                            </td>
+                            @foreach (var integral in DbContext.Progresses)
+                            {
+                                if (integral.subject.Equals("integral") && integral.level.Equals(currentUser.Level)
+                                    && integral.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @integral.CountCorrect/@integral.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Complex Numbers => </h5>
+                            </td>
+                            @foreach (var complex in DbContext.Progresses)
+                            {
+                                if (complex.subject.Equals("complexNumber") && complex.level.Equals(currentUser.Level)
+                                    && complex.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @complex.CountCorrect/@complex.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Limits => </h5>
+                            </td>
+                            @foreach (var limit in DbContext.Progresses)
+                            {
+                                if (limit.subject.Equals("limit") && limit.level.Equals(currentUser.Level)
+                                    && limit.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @limit.CountCorrect/@limit.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            }
+
+            @if (currentUser.Level == 2 || currentUser.Level == 3)
+            {
+                <hr/>
+                <div style="background: none;">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>
+                                <h5>Partial Derivation => </h5>
+                            </td>
+                            @foreach (var partial in DbContext.Progresses)
+                            {
+                                if (partial.subject.Equals("partialDerivation") && partial.level.Equals(currentUser.Level)
+                                    && partial.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @partial.CountCorrect/@partial.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Sequence And Series => </h5>
+                            </td>
+                            @foreach (var series in DbContext.Progresses)
+                            {
+                                if (series.subject.Equals("series") && series.level.Equals(currentUser.Level)
+                                    && series.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @series.CountCorrect/@series.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            }
+            @if (currentUser.Level == 3)
+            {
+                <hr/>
+                <div style="background: none;">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>
+                                <h5>Application Of Derivation => </h5>
+                            </td>
+                            @foreach (var applicDeriv in DbContext.Progresses)
+                            {
+                                if (applicDeriv.subject.Equals("applicationOfDerivation") && applicDeriv.level.Equals(currentUser.Level)
+                                    && applicDeriv.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @applicDeriv.CountCorrect/@applicDeriv.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Application Of Integration => </h5>
+                            </td>
+                            @foreach (var applicIntegral in DbContext.Progresses)
+                            {
+                                if (applicIntegral.subject.Equals("applicationOfIntegration") && applicIntegral.level.Equals(currentUser.Level)
+                                    && applicIntegral.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @applicIntegral.CountCorrect/@applicIntegral.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Inverse Functions => </h5>
+                            </td>
+                            @foreach (var inverse in DbContext.Progresses)
+                            {
+                                if (inverse.subject.Equals("inverseFunction") && inverse.level.Equals(currentUser.Level)
+                                    && inverse.userEmail.Equals(currentUser.Email))
+                                {
+                                    <pre><td><h5> @inverse.CountCorrect/@inverse.Percent</h5></td></pre>
+                                }
+                            }
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            }
+
+
+        </div>
+    </div>
+    <br/><br/><br/>
+    </body>
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <body style="background-color: ghostwhite">
+    <div class="container">
+        <div class="row matte_stort_bilde">
+            <div class="col"></div>
+            <div class="col">
+                <div class="container shadow p-5 mb-1 rounded bg-white w-75">
+
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#student">STUDENT</a>
+
+
+                        </li>     
+                    </ul>
+
+                    <p></p>
+                    <div class="index_student">- FREE</div>
+                    <hr/>
+                    <div class="index_student">- ACCESS TO 10 ONLINE COURSES</div>
+                    <hr/>
+                    <div class="index_student">- ACCESS TO ONLINE HELPER 24/7</div>
+                    <hr/>
+                    <div class="index_student">- GRADE GARANTY</div>
+                    <hr/>
+                    <div class="index_student">
+                        <a href="#student">READ MORE..</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container bg-warning">
+        <div class="row bg-warning">
+            <div class="col" style="width: 50%">
+                <iframe width="120%" height="350px"
+                        src="https://www.youtube.com/embed/FHwegxx3r-A" frameborder="0" allowfullscreen>
+                </iframe>
+            </div>
+            <div class="col" style="width: 45%">
+                <br/><br/>
+                <br>
+                <h3 style="text-align: center;">MathBuddy</h3>
+                <h5>
+                    <p style="font-style: italic; text-align: center">
+                    <br> To pass
+                    <br>
+                    <br> or not to pass
+                    <br>
+                    <br> thats the question
+
+                </h5>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container " id="student">
+        <div class="row bg-white">
+            <div class="col" style="width: 30%">
+                <br/><br/>
+                <h3 style="text-align: center;">Student</h3>
+                <h5>
+                    <p style="font-style: italic; text-align: center">
+                        <br> We would like to help you to
+                        <br> reach the grade you are aming for.
+                        <br>
+                        <br> You choose your grade,
+                        <br> and we guide you though the curriculum
+                        <br> so you can reach your goal
+                        <br>
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Sign up</a>
+                    </p>
+                </h5>
+            </div>
+            <div class="col" style="width: 70%">
+                <img src="images/StudentsImage.jpg" height="350px" width="100%" style="margin-left: 15px;"/>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="helper">
+        <div class="row bg-warning">
+            <div class="col" style="width: 70%;" align="left">
+                <img src="images/StudentImage2.jpg" height="350px" width="100%" style="margin-right: 0px;"/>
+            </div>
+            <div class="col" style="width: 30%">
+                <br/><br/>
+                <h3 style="text-align: center;">Helper</h3>
+                <h5>
+                    <p style="font-style: italic; text-align: center">
+                        <br> Have you completed the course
+                        <br> and/or receve good grades
+                        <br> you could become one of our helpers
+                        <br>
+                        <br> "Sign up" and send an email to the administrator
+                        <br> we will be in contact!
+                        <br>
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Sign up</a>
+                    </p>
+                </h5>
+            </div>
+        </div>
+
+    </div>
+    <div class="container ">
+        <div class="row bg-white">
+            <div class="col" style="width: 45%">
+                <br/><br/>
+
+            </div>
+            <div class="col" style="width: 55%">
+
+            </div>
+        </div>
+    </div>
+
+    </body>
+}
+
+</html>

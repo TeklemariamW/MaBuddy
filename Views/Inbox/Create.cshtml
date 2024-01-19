@@ -1,0 +1,79 @@
+@using mabuddy.Data
+@using mabuddy.ViewModels
+@using Microsoft.AspNetCore.Identity
+@model Inbox
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+
+@{
+    ViewData["Title"] = "Send A Message";
+}
+<body class="body">
+<div class="container shadow p-3 mb-5 bg-white rounded" style="margin: 0 auto; margin-top: 10px">
+    <h1 style="margin-left: auto; margin-right: auto">Send A Message</h1>
+    <br/>
+    <div class="container shadow p-3 mb-5 bg-white rounded" style="margin: auto; background: none;">
+
+        <div class="col-md-8 col-md-offset-2" style="margin-left: auto; margin-right: auto">
+            <form asp-action="Create">
+                <div class="form-group">
+                    <label asp-for="Title" class="Title">Title</label>
+                    <input required asp-for="Title" type="text" class="Title form-control" name="Title"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="To" class="control-label"></label>
+                    <br/>
+                    <select asp-for="To" class="custom-select">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Helper"))
+                        {
+                            foreach (var student in DbContext.Users)
+                            {
+                                <partial name="_MessageToUsers" model="student"/>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var stud in DbContext.Users)
+                            {
+                                var role = UserManager.GetRolesAsync(stud).Result.SingleOrDefault();
+                                if (role != null && (role.Equals("Admin") || role.Equals("Helper")))
+                                {
+                                    <option>@stud.Email</option>
+                                }
+                            }
+                        }
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content" class="Content">Content</label>
+                    <textarea required asp-for="Content"class="Content form-control" name="Content"></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content" class="Link">External Link</label>
+                    <input type="url" asp-for="Link"class="Link form-control" name="Link"/>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Math" class="MathForm">Math Formula</label>
+                    <textarea asp-for="Math"class="form-control bg-white mathdoxformula" name="Math"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="Submit" class="Submit btn btn-primary btn-block">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br/>
+</div>
+<br/>
+
+</body>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/formulaeditor-1.1.35b/org/mathdox/formulaeditor/main.js"></script>
+
+}

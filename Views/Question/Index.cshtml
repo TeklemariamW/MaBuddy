@@ -1,0 +1,131 @@
+@model mabuddy.Models.Questions
+
+@{
+    ViewData["Title"] = "Add Questions";
+}
+
+<body class="body" style="height: 500px">
+<div id="question" v-cloak>
+
+    <button type="button" id="create" class="btn btn-primary center" data-toggle="collapse" data-target="#questionForm" style="width: 100%">
+        ADD QUESTION
+    </button>
+
+    <div id="questionForm" class="row center collapse ">
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-top: 10px">
+                <textarea  asp-for="QuestionText" v-model="question.QuestionText" class="form-control" placeholder="Question Text"></textarea>
+
+                <span asp-validation-for="QuestionText" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <select id="Level" v-model="question.level">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+
+            <div class="form-control">
+                <label asp-for="Subject" class="control-label"></label>
+                <select id="Subject" v-model="question.Subject">
+                    <option>integral</option>
+                    <option>derivation</option>
+                    <option>limit</option>
+                    <option>complexNumber</option>
+                    <option>series</option>
+                    <option>partialDerivation</option>
+                    <option>applicationOfDerivation</option>
+                    <option>applicationOfIntegration</option>
+                    <option>inverseFunction</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input asp-for="Option1" v-model="question.option1" class="form-control" placeholder="Option 1"/>
+                <span asp-validation-for="Option1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Option2" v-model="question.option2" class="form-control" placeholder="Option 2"/>
+                <span asp-validation-for="Option2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Option3" v-model="question.option3" class="form-control" placeholder="Option 3"/>
+                <span asp-validation-for="Option3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Option4" v-model="question.option4" class="form-control" placeholder="Option 4"/>
+                <span asp-validation-for="Option4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="CorrectAnswer" v-model="question.correctAnswer" class="form-control" placeholder="correct answer"/>
+                <span asp-validation-for="Option4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="FormulaImage" v-model="question.formulaImage" class="form-control" placeholder="Formula Image Url"/>
+                <span asp-validation-for="FormulaImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="addQuestion" v-on:click="addQuestion" class="btn btn-primary">Save Question</button>
+            </div>
+        </div>
+    </div>
+
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm shadow p-3 mb-5 bg-white rounded" cellspacing="0" width="100%">
+        <thead>
+        <div class="form-group form-inline">
+            <input type="text" style="width: 100%;" class="form-control" v-model="search" name="search" placeholder="search by subject"/>
+            <button type="submit" id="search" v-on:click="Search" class="btn btn-info btn-block">Search</button>
+        </div>
+        <tr>
+
+            <th class="th-sm bg-warning">Id</th>
+            <th class="th-sm bg-warning">Question Text</th>
+            <th class="th-sm bg-warning">Level</th>
+            <th class="th-sm bg-warning">Subject</th>
+            <th class="th-sm bg-warning">Option 1</th>
+            <th class="th-sm bg-warning">Option 2</th>
+            <th class="th-sm bg-warning">Option 3</th>
+            <th class="th-sm bg-warning">Option 4</th>
+            <th class="th-sm bg-warning">Formula Image</th>
+            <th class="th-sm bg-warning">Edit</th>
+            <th class="th-sm bg-warning">Remove</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="Question in Questions">
+            <td style="padding: 14px;">{{Question.id}}</td>
+            <td>{{Question.questionText}}</td>
+            <td>{{Question.level}}</td>
+
+            <td>{{Question.subject}}</td>
+            <td>{{Question.option1}}</td>
+            <td>{{Question.option2}}</td>
+            <td>{{Question.option3}}</td>
+            <td>{{Question.option4}}</td>
+            <td>
+                <img v-bind:src=Question.formulaImage>
+            </td>
+            <td>
+                <a v-on:click="Edit(Question.id)" class="Edit   btn text-light btn-warning">Edit</a>
+            </td>
+            <td>
+                <a v-on:click="remove(Question.id)" class="Remove   btn text-light btn-danger">Remove</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/question.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}

@@ -1,0 +1,77 @@
+@model mabuddy.Models.Video
+
+@{
+    ViewData["Title"] = "Add Video";
+}
+
+<body class="body">
+<div id="video" v-cloak>
+
+    <button type="button" id="create" class="btn btn-primary center" data-toggle="collapse" data-target="#videoForm" style="width: 100%">
+        ADD Video
+    </button>
+
+    <div id="videoForm" class="row center collapse ">
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-top: 10px">
+                <input asp-for="VideoTitle" v-model="video.VideoTitle" class="form-control" placeholder="Video Title"></input>
+
+                <span asp-validation-for="VideoTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Level" v-model="video.level" class="form-control" placeholder="Level" max="3" min="1"/>
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="videoUrl" v-model="video.VideoUrl" class="form-control" placeholder="Video Url"/>
+                <span asp-validation-for="videoUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="addQuestion" v-on:click="addQuestion" class="btn btn-primary">Save Video</button>
+            </div>
+        </div>
+    </div>
+
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm shadow p-3 mb-5 bg-white rounded" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+
+            <th class="th-sm bg-warning">Id</th>
+            <th class="th-sm bg-warning">Video Title</th>
+            <th class="th-sm bg-warning">Level</th>
+            <th class="th-sm bg-warning">Video URL</th>
+            <th class="th-sm bg-warning">Edit</th>
+            <th class="th-sm bg-warning">Remove</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="Video in Videos">
+            <td style="padding: 14px;">{{Video.id}}</td>
+            <td>{{Video.videoTitle}}</td>
+
+
+            <td>{{Video.level}}</td>
+            <td>{{Video.videoUrl}}</td>
+            <td>
+                <a v-on:click="Edit(Video.id)" class="Edit   btn text-light btn-warning">Edit</a>
+            </td>
+            <td>
+                <a v-on:click="remove(Video.id)" class="Remove   btn text-light btn-danger">Remove</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/video.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+}

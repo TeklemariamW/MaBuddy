@@ -1,0 +1,24 @@
+@model IEnumerable<mabuddy.Models.Tips>
+
+@{
+    ViewData["Title"] = "Tips";
+}
+
+<body class="body">
+
+<div id="tip" class="container shadow p-3 mb-5 rounded" v-cloak>
+    <h1 class="btn-block" id="HeadText" style="text-align: center">Tips</h1>
+    <div class="container shadow p-3 mb-2 bg-white rounded bg-white" v-for="Tip in Tips">
+        <h1>{{Tip.tipTitle}}</h1>
+        <p>{{Tip.tipText}}</p>
+    </div>
+</div>
+</body>
+
+@section Scripts
+{
+    <script src="~/js/tips.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+}
